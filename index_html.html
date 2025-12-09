@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses App</title>
+</head>
+<body>
+  <h1>Courses App</h1>
+  <div id="courses"></div>
+
+  <script>
+    async function loadCourses() {
+      const res = await fetch('http://localhost:3000/courses');
+      const data = await res.json();
+      document.getElementById('courses').innerHTML = data.map(c => `
+        <div>
+          <h3>${c.name}</h3>
+          <p>${c.description}</p>
+        </div>
+      `).join('');
+    }
+    loadCourses();
+  </script>
+</body>
+</html>
